@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Set backup directory and create it if it doesn't exist
+BACKUP_DIR=/home/user/backups
+mkdir -p $BACKUP_DIR
+
+# Create a timestamp for the backup file name
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+
+# Backup the important files to the backup directory
+tar -czvf $BACKUP_DIR/backup_$TIMESTAMP.tar.gz /home/user/docs /home/user/pics
+
+# Remove old backups older than 7 days
+find $BACKUP_DIR/* -mtime +7 -exec rm {} \;
